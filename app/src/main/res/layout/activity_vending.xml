@@ -35,6 +35,7 @@
         android:layout_below="@+id/depositButton"
         android:hint="@string/enter_choco_bar_name"
         android:inputType="textCapWords" />
+    <!-- TODO add autofill(Hints) -->
 
     <Button
         android:id="@+id/vendButton"

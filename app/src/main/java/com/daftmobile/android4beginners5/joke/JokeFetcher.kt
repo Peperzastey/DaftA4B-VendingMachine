@@ -17,6 +17,8 @@ class JokeFetcher: JokeDataSource {
 
     override fun fetch(onSuccess: (String) -> Unit, onError: (String) -> Unit) {
         val call = jokeApi.getJoke(Settings.Secure.ANDROID_ID)
+
+        //NOTE: On Android, callbacks will be executed on the main thread. On the JVM, callbacks will happen on the same thread that executed the HTTP request.
         call.enqueue(object : Callback<ResponseBody> {
             override fun onFailure(call: Call<ResponseBody>, t: Throwable) {
                 onError(t.message ?: "No message")

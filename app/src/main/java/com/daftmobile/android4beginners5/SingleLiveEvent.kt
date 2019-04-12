@@ -21,7 +21,9 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
         }
         // Observe the internal MutableLiveData
         super.observe(owner, Observer<T> { t ->
+            Log.d(TAG, "internal MutableLiveData's observer called")
             if (pending.compareAndSet(true, false)) {
+                Log.d(TAG, "SingleLiveEvent's observer called")
                 observer.onChanged(t)
             }
         })
@@ -29,6 +31,7 @@ class SingleLiveEvent<T> : MutableLiveData<T>() {
 
     @MainThread
     override fun setValue(t: T?) {
+        Log.d(TAG, "SingleLiveData's setValue called => its observer will be called once")
         pending.set(true)
         super.setValue(t)
     }
